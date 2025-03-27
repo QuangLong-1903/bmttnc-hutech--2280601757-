@@ -6,12 +6,12 @@ app = Flask(__name__)
 #RSA CIPHER ALGORITHM
 rsa_cipher = RSACipher()
 
-@app.route('/API/rsa/generate_keys', methods=['GET'])
+@app.route('/api/rsa/generate_keys', methods=['GET'])
 def rsa_generate_keys():
     rsa_cipher.generate_keys()
     return jsonify({'message':'Keys generated successfully'})
 
-@app.route("/API/rsa/encrypt", methods=["POST"])
+@app.route("/api/rsa/encrypt", methods=["POST"])
 def rsa_encrypt():
     data = request.json
     message = data['message']
@@ -27,7 +27,7 @@ def rsa_encrypt():
     encrypted_hex = encrypted_message.hex()
     return jsonify({'encrypted_message': encrypted_hex})
 
-@app.route("/API/rsa/decrypt", methods =["POST"])
+@app.route("/api/rsa/decrypt", methods =["POST"])
 def rsa_decrypt():
     data = request.json
     ciphertext_hex = data['ciphertext']
@@ -44,7 +44,7 @@ def rsa_decrypt():
     return jsonify ({'decrypted_message': decrypted_message})
 
 
-@app.route('/API/rsa/sign',methods=['POST'])
+@app.route('/api/rsa/sign',methods=['POST'])
 def rsa_sign_message():
     data = request.json
     message = data['message']
@@ -53,7 +53,7 @@ def rsa_sign_message():
     signature_hex = signature.hex()
     return jsonify({'signature': signature_hex})
 
-@app.route ('/API/rsa/verify',methods=['POST'])
+@app.route ('/api/rsa/verify',methods=['POST'])
 def rsa_verify_message():
     data = request.json
     message = data['message']
